@@ -16,42 +16,42 @@ public class mlp {
 	double delta5;
 	double delta3;
 	double delta4;
-	double alpha = 0.1;
+	double alpha = .5;
 	double sumOfErrors = 1;
 	int epochs = 0;
 	
 	public mlp() {
 		
-//		Scanner scan = new Scanner(System.in);
-//		System.out.println("weight 13?");
-//		w13 = scan.nextDouble();
-//		System.out.println("weight 23?");
-//		w23 = scan.nextDouble();
-//		System.out.println("weight 14?");
-//		w14 = scan.nextDouble();
-//		System.out.println("weight 24?");
-//		w24 = scan.nextDouble();
-//		System.out.println("weight 35?");
-//		w35 = scan.nextDouble();
-//		System.out.println("weight 45?");
-//		w45 = scan.nextDouble();
-//		System.out.println("theta 3?");
-//		t3  = scan.nextDouble();
-//		System.out.println("theta 4?");
-//		t4 = scan.nextDouble();
-//		System.out.println("theta 5?");
-//		t5 = scan.nextDouble();
+		Scanner scan = new Scanner(System.in);
+		System.out.println("weight 13?");
+		w13 = scan.nextDouble();
+		System.out.println("weight 23?");
+		w23 = scan.nextDouble();
+		System.out.println("weight 14?");
+		w14 = scan.nextDouble();
+		System.out.println("weight 24?");
+		w24 = scan.nextDouble();
+		System.out.println("weight 35?");
+		w35 = scan.nextDouble();
+		System.out.println("weight 45?");
+		w45 = scan.nextDouble();
+		System.out.println("theta 3?");
+		t3  = scan.nextDouble();
+		System.out.println("theta 4?");
+		t4 = scan.nextDouble();
+		System.out.println("theta 5?");
+		t5 = scan.nextDouble();
 		
 		
-		w13 = .5;
-		w23 = .9;
-		w14 = .4;
-		w24 = 1;
-		w35 = -1.2;
-		w45 = 1.1;
-		t3 = .8;
-		t4 = -.13;
-		t5 = .3;
+//		w13 = .5;
+//		w23 = .9;
+//		w14 = .4;
+//		w24 = 1;
+//		w35 = -1.2;
+//		w45 = 1.1;
+//		t3 = .8;
+//		t4 = -.13;
+//		t5 = .3;
 		
 		while(sumOfErrors >.001) {
 			sumOfErrors = 0;
