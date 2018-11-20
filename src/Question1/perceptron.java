@@ -13,7 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class perceptron {
 	int theta = -2;
-	double alpha = -0.2;
+	double alpha = 0.2;
 	double w1 = 1;
 	double w2 = -2;
 	
@@ -27,42 +27,39 @@ public class perceptron {
 		
 		for(int i = 0; i < 30; i++)
 		{
-				trainApples1();
-				trainOranges1();
-				if(i == 29)
-				{
-					System.out.println();
-				}
-		}
-				
+				getActualOutput(apples1, 0);
+				getActualOutput(oranges1, 1);
+		}	
 		
 	}
-	public void trainApples1() {
-		int[] applesActualOutput = getActualOutput(apples1);
-		System.out.println(" Apples " + Arrays.toString(applesActualOutput));
-		for(int i = 0; i < apples1.length; i++)
-		{
-			w1 = w1 + (alpha * apples1[0][i] * (0 - applesActualOutput[i]));
-			w2 = w2 + (alpha * apples1[1][i] * (0 - applesActualOutput[i]));
-		}
-	}
-	public void trainOranges1() {
-		int[] orangesActualOutput = getActualOutput(oranges1);
-		System.out.println("    Oranges " + Arrays.toString(orangesActualOutput));
-		for(int i = 0; i < oranges1.length; i++)
-		{
-			w1 = w1 + (alpha * oranges1[0][i] * (1 - orangesActualOutput[i]));
-			w2 = w2 + (alpha * oranges1[1][i] * (1 - orangesActualOutput[i]));
-		}
-	}
-	public int[] getActualOutput(double[][] array) {
+//	public void trainApples1() {
+//		int[] applesActualOutput = getActualOutput(apples1);
+//		System.out.print("Apples " + Arrays.toString(applesActualOutput));
+//		for(int i = 0; i < apples1.length; i++)
+//		{
+//			w1 = w1 + (alpha * apples1[0][i] * (0 - applesActualOutput[i]));
+//			w2 = w2 + (alpha * apples1[1][i] * (0 - applesActualOutput[i]));
+//		}
+//	}
+//	public void trainOranges1() {
+//		int[] orangesActualOutput = getActualOutput(oranges1);
+//		System.out.print(" Oranges " + Arrays.toString(orangesActualOutput));
+//		for(int i = 0; i < oranges1.length; i++)
+//		{
+//			w1 = w1 + (alpha * oranges1[0][i] * (1 - orangesActualOutput[i]));
+//			w2 = w2 + (alpha * oranges1[1][i] * (1 - orangesActualOutput[i]));
+//		}
+//	}
+	public int[] getActualOutput(double[][] array, int expected) {
 		int[] result = new int[array[0].length];
 		for(int i = 0; i < result.length; i++)
 		{
 			double something = ((w1 * array[0][i]) + (w2 * array[1][i])) - theta;
 			result[i] = (something >= 0 ? 1 : 0);
+			w1 = w1 + (alpha + array[0][i] * (expected - result[i]));
+			w2 = w2 + (alpha + array[1][i] * (expected - result[i]));
 		}
-		
+		System.out.println(Arrays.toString(result));
 		return result;
 	}
  	public double[][] getValues(int s){
