@@ -19,46 +19,28 @@ public class perceptron {
 	double bias = 1;
 	
 	int epoch = 0;
-	double[][] apples1;
-	double[][] oranges1;
+	double[][] apples2;
+	double[][] oranges2;
 	int[] actual1 = new int[10];
 	int[] actual2 = new int[10];
 	public perceptron() {
-		apples1 = getValues(0);
-		oranges1 = getValues(1);
+		apples2 = getValues(2);
+		oranges2 = getValues(3);
 		System.out.println();
 		
 		for(int k = 0; k < 20; k++) {
 			for(int i = 0; i < 10; i++)
 			{
-					train(apples1, 0, i);
-					actual1[i] = findActual(apples1,i);
-					train(oranges1, 1, i);
-					actual2[i] = findActual(oranges1,i);
+					train(apples2, 0, i);
+					actual1[i] = findActual(apples2,i);
+					train(oranges2, 1, i);
+					actual2[i] = findActual(oranges2,i);
 			}
 			System.out.println("Apples " + Arrays.toString(actual1) + " Oranges " + Arrays.toString(actual2));
 		}
 		System.out.println();
 		
 	}
-//	public void trainApples1() {
-//		int[] applesActualOutput = getActualOutput(apples1);
-//		System.out.print("Apples " + Arrays.toString(applesActualOutput));
-//		for(int i = 0; i < apples1.length; i++)
-//		{
-//			w1 = w1 + (alpha * apples1[0][i] * (0 - applesActualOutput[i]));
-//			w2 = w2 + (alpha * apples1[1][i] * (0 - applesActualOutput[i]));
-//		}
-//	}
-//	public void trainOranges1() {
-//		int[] orangesActualOutput = getActualOutput(oranges1);
-//		System.out.print(" Oranges " + Arrays.toString(orangesActualOutput));
-//		for(int i = 0; i < oranges1.length; i++)
-//		{
-//			w1 = w1 + (alpha * oranges1[0][i] * (1 - orangesActualOutput[i]));
-//			w2 = w2 + (alpha * oranges1[1][i] * (1 - orangesActualOutput[i]));
-//		}
-//	}
 	public int[] getActualOutput(double[][] array, int expected) {
 		int[] result = new int[array[0].length];
 		for(int i = 0; i < result.length; i++)
