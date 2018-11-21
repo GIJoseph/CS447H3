@@ -16,20 +16,29 @@ public class perceptron {
 	double alpha = 0.2;
 	double w1 = 1;
 	double w2 = -2;
+	double bias = 1;
 	
 	int epoch = 0;
 	double[][] apples1;
 	double[][] oranges1;
+	int[] actual1 = new int[10];
+	int[] actual2 = new int[10];
 	public perceptron() {
 		apples1 = getValues(0);
 		oranges1 = getValues(1);
 		System.out.println();
 		
-		for(int i = 0; i < 30; i++)
-		{
-				getActualOutput(apples1, 0);
-				getActualOutput(oranges1, 1);
-		}	
+		for(int k = 0; k < 30; k++) {
+			for(int i = 0; i < 10; i++)
+			{
+					train(apples1, 0, i);
+					actual1[i] = findActual(apples1,i);
+					train(oranges1, 1, i);
+					actual2[i] = findActual(oranges1,i);
+			}
+			System.out.println("Apples " + Arrays.toString(actual1) + " Oranges " + Arrays.toString(actual2));
+		}
+		System.out.println();
 		
 	}
 //	public void trainApples1() {
@@ -62,6 +71,23 @@ public class perceptron {
 		System.out.println(Arrays.toString(result));
 		return result;
 	}
+	public void train(double[][] inputs, int desired, int count)
+	{
+		int guess = findActual(inputs, count);
+		double error = desired - guess;
+		w1 += alpha * error * inputs[0][count];
+		w2 += alpha * error * inputs[1][count];
+		bias += alpha * error;
+	}
+	public int findActual(double[][] inputs, int count)
+	{
+		double sum = 0;
+		sum += inputs[0][count] * w1;
+		sum += inputs[1][count] * w2;
+		sum += bias;
+		return (sum >= 0? 1: 0);
+	}
+	
  	public double[][] getValues(int s){
 
 		try {
