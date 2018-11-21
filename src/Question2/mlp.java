@@ -117,20 +117,8 @@ public class mlp {
 		w24 = w24 + cw24;
 		w35 = w35 + cw35;
 		w45 = w45 + cw45;
-		
-	//	System.out.println(w24);
-		
-	//	System.out.println(w45);
-		
-		
-		
+	
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	
 }

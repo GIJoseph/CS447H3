@@ -1,10 +1,12 @@
-package Question1;
+package Question3;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Scanner;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -12,65 +14,175 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class perceptron {
-	int theta = -2;
-	double alpha = 0.2;
-	double w1 = 1;
-	double w2 = -2;
-	double bias = 1;
+	double[] w = new double[6];
+	double w13,w23,w14,w24,w35,w45;
+	double cw13,cw23,cw14,cw24,cw35,cw45;
+	double t3,t4,t5;
+	double y3, y4, y5;
+	double error;
+	double[] x1 = new double[]{1, 0, 1, 0};
+	double[] x2 = new double[]{1, 1, 0, 0};
+	double[] desiredOut = new double[]{0, 1, 1, 0};
+	int count = 0;
+	double delta5;
+	double delta3;
+	double delta4;
+	double alpha = .5;
+	double sumOfErrors = 1;
+	int epochs = 0;
 	
-	int epoch = 0;
-	double[][] apples2;
-	double[][] oranges2;
-	int[] actual1 = new int[10];
-	int[] actual2 = new int[10];
+	double[] test1 = new double[20];
+	double[] test2 = new double[20];
+	
+	double[][] apples;
+	double[][] oranges;
+	double actualOutputApples;
+	double desiredApple;
+	
 	public perceptron() {
-		apples2 = getValues(2);
-		oranges2 = getValues(3);
-		System.out.println();
 		
-		for(int k = 0; k < 20; k++) {
-			for(int i = 0; i < 10; i++)
+		
+		
+		apples = getValues(2);
+		oranges = getValues(3);
+//		w13 = .5;
+//		w23 = .9;
+//		w14 = .4;
+//		w24 = 1;
+//		w35 = -1.2;
+//		w45 = 1.1;
+//		t3 = .8;
+//		t4 = -.13;
+//		t5 = .3;
+		
+		while(sumOfErrors > .001) {
+			sumOfErrors = 0;
+			epochs ++;
+			for (count = 0; count < 20; count++)
 			{
-					train(apples2, 0, i);
-					actual1[i] = findActual(apples2,i);
-					train(oranges2, 1, i);
-					actual2[i] = findActual(oranges2,i);
+				actualOutputApples();
+				trainApples();
+				test1[count] = error * error;
+				sumOfErrors += test1[count];
+				actualOutputOranges();
+				trainOranges();
+				test2[count] = error * error;
+				sumOfErrors += test2[count];
+				//sumOfErrors += Math.pow(error, 2);
 			}
-			System.out.println("Apples " + Arrays.toString(actual1) + " Oranges " + Arrays.toString(actual2));
+			System.out.println(Arrays.toString(test1) + "\n" + Arrays.toString(test2));
+			//System.out.print("");
 		}
-		System.out.println();
-		
-	}
-	public int[] getActualOutput(double[][] array, int expected) {
-		int[] result = new int[array[0].length];
-		for(int i = 0; i < result.length; i++)
-		{
-			double something = ((w1 * array[0][i]) + (w2 * array[1][i])) - theta;
-			result[i] = (something >= 0 ? 1 : 0);
-			w1 = w1 + (alpha + array[0][i] * (expected - result[i]));
-			w2 = w2 + (alpha + array[1][i] * (expected - result[i]));
-		}
-		System.out.println(Arrays.toString(result));
-		return result;
-	}
-	public void train(double[][] inputs, int desired, int count)
-	{
-		int guess = findActual(inputs, count);
-		double error = desired - guess;
-		w1 += alpha * error * inputs[0][count];
-		w2 += alpha * error * inputs[1][count];
-		bias += alpha * error;
-	}
-	public int findActual(double[][] inputs, int count)
-	{
-		double sum = 0;
-		sum += inputs[0][count] * w1;
-		sum += inputs[1][count] * w2;
-		sum += bias;
-		return (sum >= 0? 1: 0);
+		//System.out.println(epochs);
 	}
 	
- 	public double[][] getValues(int s){
+	public void actualOutputApples()
+	{
+		y3 = (1 / (1 + ( Math.pow(Math.E, (-1 * (apples[0][count] * w13 + apples[1][count] * w23 - t3))))));
+		//System.out.println(y3);
+		y4 = (1 /(1 + ( Math.pow(Math.E, (-1 * (apples[0][count] * w14 + apples[1][count] * w24 - t4))))));
+		
+		//System.out.println(y4);
+		
+		y5 = (1 / (1 + ( Math.pow(Math.E, (-1 * ((y3 * w35) + (y4 * w45) - t5))))));
+		
+		//System.out.println(y5);
+		
+		
+		error = (desiredApple - y5);
+		//System.out.println(error);
+		
+	}
+	public void actualOutputOranges()
+	{
+		y3 = (1 / (1 + ( Math.pow(Math.E, (-1 * (oranges[0][count] * w13 + oranges[1][count] * w23 - t3))))));
+		//System.out.println(y3);
+		y4 = (1 /(1 + ( Math.pow(Math.E, (-1 * (oranges[0][count] * w14 + oranges[1][count] * w24 - t4))))));
+		
+		//System.out.println(y4);
+		
+		y5 = (1 / (1 + ( Math.pow(Math.E, (-1 * ((y3 * w35) + (y4 * w45) - t5))))));
+		
+		//System.out.println(y5);
+		
+		
+		error = (desiredApple - y5);
+		//System.out.println(error);
+		
+	}
+	
+	public void trainApples()
+	{
+		delta5 = y5 * (1-y5) * error;
+		//System.out.println(delta5);
+		
+		cw35 = alpha * y3 * delta5;
+		cw45 = alpha * y4 * delta5;
+		//System.out.println(w35);
+		//System.out.println(w45);
+		
+		
+		delta3 = y3 * (1 - y3) * delta5 * w35;
+		delta4 = y4 * (1 - y4) * delta5 * w45;
+		//System.out.println(delta3);
+		//System.out.println(delta4);
+		//System.out.println(y3);
+		
+		
+		cw13 = alpha * apples[0][count] * delta3;
+		//System.out.println(cw13);
+		cw23 = alpha * apples[1][count] * delta3;
+		//System.out.println(cw23);
+		cw14 = alpha * apples[0][count] * delta4;
+		//System.out.println(cw14);
+		cw24 = alpha * apples[1][count] * delta4;
+		//System.out.println(cw24);
+		
+		w13 = w13 + cw13;
+		w14 = w14 + cw14;
+		w23 = w23 + cw23;
+		w24 = w24 + cw24;
+		w35 = w35 + cw35;
+		w45 = w45 + cw45;
+	
+	}
+	public void trainOranges()
+	{
+		delta5 = y5 * (1-y5) * error;
+		//System.out.println(delta5);
+		
+		cw35 = alpha * y3 * delta5;
+		cw45 = alpha * y4 * delta5;
+		//System.out.println(w35);
+		//System.out.println(w45);
+		
+		
+		delta3 = y3 * (1 - y3) * delta5 * w35;
+		delta4 = y4 * (1 - y4) * delta5 * w45;
+		//System.out.println(delta3);
+		//System.out.println(delta4);
+		//System.out.println(y3);
+		
+		
+		cw13 = alpha * oranges[0][count] * delta3;
+		//System.out.println(cw13);
+		cw23 = alpha * oranges[1][count] * delta3;
+		//System.out.println(cw23);
+		cw14 = alpha * oranges[0][count] * delta4;
+		//System.out.println(cw14);
+		cw24 = alpha * oranges[1][count] * delta4;
+		//System.out.println(cw24);
+		
+		w13 = w13 + cw13;
+		w14 = w14 + cw14;
+		w23 = w23 + cw23;
+		w24 = w24 + cw24;
+		w35 = w35 + cw35;
+		w45 = w45 + cw45;
+	
+	}
+
+	public double[][] getValues(int s){
 
 		try {
 			ArrayList<ArrayList<Double>> table = new ArrayList<ArrayList<Double>>();
