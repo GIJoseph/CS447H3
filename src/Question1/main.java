@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JFrame;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -18,6 +20,7 @@ public class main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new perceptron();
+		//frame.repaint();
 	}
 
 }

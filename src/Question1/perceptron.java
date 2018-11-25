@@ -1,10 +1,13 @@
 package Question1;
+import java.awt.geom.Line2D;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+
+import javax.swing.JFrame;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -23,22 +26,40 @@ public class perceptron {
 	double[][] oranges1;
 	int[] actual1 = new int[10];
 	int[] actual2 = new int[10];
+	
 	public perceptron() {
 		apples1 = getValues(0);
 		oranges1 = getValues(1);
-		System.out.println();
 		
-		for(int k = 0; k < 20; k++) {
+		
+		int sumOfError = 1;
+		for(int k = 0; sumOfError != 0; k++) {
+			sumOfError = 0;
 			for(int i = 0; i < 10; i++)
 			{
 					train(apples1, 0, i);
 					actual1[i] = findActual(apples1,i);
+					sumOfError += 0 - actual1[i];
 					train(oranges1, 1, i);
 					actual2[i] = findActual(oranges1,i);
+					sumOfError += 1 - actual2[i];
 			}
 			System.out.println("Apples " + Arrays.toString(actual1) + " Oranges " + Arrays.toString(actual2));
 		}
 		System.out.println();
+		JFrame frame = new JFrame("Something");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		GraphPanel graph = new GraphPanel();
+		graph.apples = apples1;
+		graph.oranges = oranges1;
+		graph.w1 = w1;
+		graph.w2 = w2;
+		graph.theta = theta;
+		
+		frame.add(graph);
+		frame.setSize(500, 500);
+		frame.setVisible(true);
 		
 	}
 //	public void trainApples1() {
