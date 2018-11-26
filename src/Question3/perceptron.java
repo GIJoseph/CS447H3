@@ -54,8 +54,9 @@ public class perceptron {
 //		t3 = .8;
 //		t4 = -.13;
 //		t5 = .3;
-		
-		while(sumOfErrors > .001) {
+		int tempCount = 0;
+		while(tempCount < 100) 
+		{
 			sumOfErrors = 0;
 			epochs ++;
 			for (count = 0; count < 20; count++)
@@ -72,7 +73,9 @@ public class perceptron {
 			}
 			System.out.println(Arrays.toString(test1) + "\n" + Arrays.toString(test2));
 			//System.out.print("");
+			tempCount++;
 		}
+		
 		//System.out.println(epochs);
 	}
 	
@@ -89,7 +92,7 @@ public class perceptron {
 		//System.out.println(y5);
 		
 		
-		error = (desiredApple - y5);
+		error = (0 - y5);
 		//System.out.println(error);
 		
 	}
@@ -106,7 +109,7 @@ public class perceptron {
 		//System.out.println(y5);
 		
 		
-		error = (desiredApple - y5);
+		error = (1 - y5);
 		//System.out.println(error);
 		
 	}

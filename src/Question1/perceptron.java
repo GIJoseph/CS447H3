@@ -33,7 +33,7 @@ public class perceptron {
 		
 		
 		int sumOfError = 1;
-		for(int k = 0; sumOfError != 0; k++) {
+		for(int k = 0; k<4; k++) {
 			sumOfError = 0;
 			for(int i = 0; i < 10; i++)
 			{
@@ -46,8 +46,11 @@ public class perceptron {
 			}
 			System.out.println("Apples " + Arrays.toString(actual1) + " Oranges " + Arrays.toString(actual2));
 		}
+		
+		System.out.println(w1);
+		System.out.println(w2);
 		System.out.println();
-		JFrame frame = new JFrame("Something");
+		JFrame frame = new JFrame("Perceptron");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		GraphPanel graph = new GraphPanel();

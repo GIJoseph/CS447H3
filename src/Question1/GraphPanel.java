@@ -49,13 +49,48 @@ public class GraphPanel extends JPanel {
 	}
 	public void drawPerceptronLine()
 	{
-		double x1 = 0;
-		double y1 = 3.62427; //(-1 * theta/w1);
-		double x2 = 3.12763; //( theta/w2);
-		double y2 = 0;
+//		double x1 = 0;
+//		double y1 = -3.220127; //(-1 * theta/w1);
+//		double x2 = 1.4511397; //( theta/w2);
+//		double y2 = 0;
+		
+//		double w1 = 1;
+//		double w2 = -2;
+		
+		
+		
+		
+		double Yint;
+		double Xint;
+		double slope;
+		double find4;
+		
+		
+		
+		Yint = 2/w2;
+		Xint = 2/w1;
+		slope = -((-2/w2)/(-2/w1));
+		
+		
+		
+		find4 = (4.0 - Yint)/slope;
+		
+		System.out.println(Xint);
+		System.out.println(Yint);
+		
+		System.out.println(find4);
+		
+		double x1 = Xint;
+		double y1 = 0; //(-1 * theta/w1);
+		double x2 = find4; //( theta/w2);
+		double y2 = 4.0;
+		//slope = 2.219033 3.25373
 		gr.drawLine((int) (50 + (((width - 50)/(num /2)) * x1)), (int) (height - (50 + (((height - 50)/(num /2)) * y1))) ,(int) (50 + (((width - 50)/(num /2)) * x2)) , (int) (height - (50 + (((height - 50)/(num /2)) * y2))));
 		System.out.println(x1 + " " + y1 + " " + x2 + " " + y2);
 	}
+	
+	
+	
 	public void drawApples()
 	{
 		gr.setColor(Color.BLUE);
