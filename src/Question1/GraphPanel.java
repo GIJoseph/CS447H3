@@ -81,8 +81,8 @@ public class GraphPanel extends JPanel {
 		System.out.println(find4);
 		
 		double x1 = Xint;
-		double y1 = 0; //(-1 * theta/w1);
-		double x2 = find4; //( theta/w2);
+		double y1 = 0;
+		double x2 = find4;
 		double y2 = 4.0;
 		//slope = 2.219033 3.25373
 		gr.drawLine((int) (50 + (((width - 50)/(num /2)) * x1)), (int) (height - (50 + (((height - 50)/(num /2)) * y1))) ,(int) (50 + (((width - 50)/(num /2)) * x2)) , (int) (height - (50 + (((height - 50)/(num /2)) * y2))));

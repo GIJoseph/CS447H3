@@ -16,7 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class perceptron {
 	int theta = -2;
-	double alpha = 0.2;
+	double alpha = 0.24;
 	double w1 = 1;
 	double w2 = -2;
 	double bias = 1;
@@ -33,7 +33,7 @@ public class perceptron {
 		
 		
 		int sumOfError = 1;
-		for(int k = 0; k<4; k++) {
+		for(int k = 0; k<6; k++) {
 			sumOfError = 0;
 			for(int i = 0; i < 10; i++)
 			{
